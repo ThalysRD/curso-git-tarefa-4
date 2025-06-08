@@ -19,6 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verifica se index.html existe
+        run: test -f "public/index.html" || (echo "ERRO: Arquivo public/index.html não encontrado!" && exit 1)
+
       - name: Preparando arquivos
         run: echo "Publicando site..."
 
