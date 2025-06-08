@@ -1,11 +1,27 @@
-image: alpine:latest
 
-pages:
-  stage: deploy
-  script:
-    - echo "Publicando site..."
-  artifacts:
-    paths:
-      - public
-  only: 
-    - main
+name: Deploy para GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: alpine:latest
+    steps:
+        uses: actions/checkout@v4
+
+        run: echo "Publicando site..."
+
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
