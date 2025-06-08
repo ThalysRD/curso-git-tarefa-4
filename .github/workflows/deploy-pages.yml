@@ -1,5 +1,4 @@
-# Nome do Pipeline
-name: Deploy para GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -12,18 +11,17 @@ permissions:
   id-token: write
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verifica se index.html existe
+      - name: Verifica se o arquivo index.html existe
         run: test -f "public/index.html" || (echo "ERRO: Arquivo public/index.html não encontrado!" && exit 1)
 
-      - name: Preparando arquivos
-        run: echo "Publicando site..."
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
