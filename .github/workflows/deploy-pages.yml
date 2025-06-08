@@ -17,10 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List files in workspace
-        run: ls -R
-
-      - name: Verifica se o arquivo index.html existe
+      - name: Verify if index.html exists
         run: test -f "public/index.html" || (echo "ERRO: Arquivo public/index.html não encontrado!" && exit 1)
 
       - name: Setup Pages
@@ -30,6 +27,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './public'
-
+      
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
