@@ -1,4 +1,4 @@
-
+# Nome do Pipeline
 name: Deploy para GitHub Pages
 
 on:
@@ -12,12 +12,20 @@ permissions:
   id-token: write
 
 jobs:
+
   deploy:
     runs-on: alpine:latest
     steps:
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Preparando arquivos
         run: echo "Publicando site..."
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './public'
+      
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
